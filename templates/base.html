@@ -1,0 +1,23 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{{ title }}</title>
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/png">
+        <link rel="stylesheet" href="{% static 'styles/global.css' %}">
+        {% for style in styles %}
+            <link rel="stylesheet" href="{% static style %}">
+        {% endfor %}
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+        {% for script in scripts %}
+            <script src="{{ script }}"></script>
+        {% endfor %}
+    </body>
+</html>
