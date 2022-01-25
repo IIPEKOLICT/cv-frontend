@@ -5,6 +5,7 @@ My Django + PostgreSQL CV app
 ## Commands
 Most used:
 ```shell
+pip install -r requirements.txt
 python manage.py startapp [appname]
 python manage.py makemigrations
 python manage.py migrate
