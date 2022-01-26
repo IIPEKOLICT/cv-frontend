@@ -39,7 +39,7 @@ class ApiView:
 
     @staticmethod
     def get_cv(_, cv_id):
-        cv = CvSerializer(Cv.objects.get(pk=cv_id), many=True).data
+        cv = CvSerializer(Cv.objects.get(pk=cv_id)).data
         return JsonResponse({ 'cv': cv })
 
     @staticmethod
