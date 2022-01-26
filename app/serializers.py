@@ -2,12 +2,6 @@ from rest_framework import serializers
 from .models import *
 
 class ContactSerializer(serializers.ModelSerializer):
-    icon = serializers.SerializerMethodField()
-
-    def get_icon(self, contact):
-        request = self.context.get('request')
-        return request.build_absolute_uri(contact.icon.url)
-
     class Meta:
         model = Contact
         fields = ('id', 'name', 'icon', 'link')
@@ -23,12 +17,6 @@ class EmploymentSerializer(serializers.ModelSerializer):
         fields = ('id', 'place', 'desc', 'period')
 
 class TechnologySerializer(serializers.ModelSerializer):
-    logo = serializers.SerializerMethodField()
-
-    def get_logo(self, technology):
-        request = self.context.get('request')
-        return request.build_absolute_uri(technology.logo.url)
-
     class Meta:
         model = Technology
         fields = ('id', 'name', 'logo')

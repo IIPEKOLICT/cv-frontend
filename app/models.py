@@ -3,7 +3,7 @@ from django.db import models
 
 class Contact(models.Model):
     name = models.CharField(max_length=50, blank=True)
-    icon = models.ImageField(upload_to='contacts')
+    icon = models.URLField(blank=True, default='')
     link = models.URLField()
 
     class Meta:
@@ -40,7 +40,7 @@ class Employment(models.Model):
 
 class Technology(models.Model):
     name = models.CharField(max_length=30)
-    logo = models.ImageField(upload_to='technologies')
+    logo = models.URLField(blank=True, default='')
 
     class Meta:
         verbose_name_plural = 'technologies'
