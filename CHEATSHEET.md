@@ -16,6 +16,7 @@ psql -U postgres
 
 For create named heroku app:
 ```shell
+heroku login
 heroku create [app name]
 git push heroku [branch name]
 ```
