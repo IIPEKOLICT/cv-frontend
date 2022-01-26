@@ -37,7 +37,7 @@ class Employment(models.Model):
         return self.place
 
 
-class Tech(models.Model):
+class ProjectTechnology(models.Model):
     name = models.CharField(max_length=30)
     logo = models.URLField(blank=True)
 
@@ -49,10 +49,22 @@ class Tech(models.Model):
         return self.name
 
 
+class Technology(models.Model):
+    name = models.CharField(max_length=30)
+    logo = models.URLField(blank=True)
+
+    class Meta:
+        verbose_name_plural = 'technologies'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
 class Project(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    project_techs = models.ForeignKey(Tech, on_delete=models.CASCADE)
+    project_techs = models.ForeignKey(Technology, on_delete=models.CASCADE)
     deploy = models.URLField()
     repo = models.URLField(blank=True)
     date = models.DateTimeField(auto_now_add=True)
@@ -72,6 +84,8 @@ class Cv(models.Model):
     contacts = models.ForeignKey(Contact, on_delete=models.CASCADE)
     educations = models.ForeignKey(Education, on_delete=models.CASCADE)
     english = models.TextField(blank=True)
+    technologies = models.ForeignKey(Technology, on_delete=models.CASCADE)
+    projects = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = 'cvs'

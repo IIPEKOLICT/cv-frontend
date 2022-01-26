@@ -2,6 +2,7 @@
 {% block content %}
     <h1 class="header">CV api worked</h1>
     <div class="docs__container">
+        <p><a href="/admin">Go to admin panel</a></p>
         <h2 class="docs__header">API docs:</h2>
         {% for doc in docs %}
             <div class="docs__card">
@@ -11,12 +12,6 @@
                 <ul>
                     {% for param in doc.params %}
                         <li>{{ param.name }} ({{ param.param_type }}) - {{ param.desc }}</li>
-                    {% endfor %}
-                </ul>
-                <p>Response fields:</p>
-                <ul>
-                    {% for field in doc.fields %}
-                        <li>{{ field.name }} ({{ field.field_type }}) - {{ field.desc }}</li>
                     {% endfor %}
                 </ul>
             </div>
