@@ -8,7 +8,7 @@
             <div class="docs__card">
                 <h4 class="card-header">{{ doc.title }}</h4>
                 <p>{{ doc.method }} {{ doc.path }}</p>
-                <p>Params:{% if doc.params.length == 0 %} no params {% endif %}</p>
+                <p>Params:</p>
                 <ul>
                     {% for param in doc.params %}
                         <li>{{ param.name }} ({{ param.param_type }}) - {{ param.desc }}</li>

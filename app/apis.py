@@ -4,7 +4,7 @@ from .serializers import *
 class ApiView:
     @staticmethod
     def get_projects(_):
-        projects = ProjectSerializer(Project.objects.all().order_by('-project_date'), many=True).data
+        projects = ProjectSerializer(Project.objects.all().order_by('-date'), many=True).data
         return JsonResponse({ 'projects': projects })
 
     @staticmethod
@@ -19,12 +19,12 @@ class ApiView:
 
     @staticmethod
     def get_educations(_):
-        educations = EducationSerializer(Education.objects.all()).data
+        educations = EducationSerializer(Education.objects.all(), many=True).data
         return JsonResponse({ 'educations': educations })
 
     @staticmethod
     def get_employments(_):
-        employments = EmploymentSerializer(Employment.objects.all()).data
+        employments = EmploymentSerializer(Employment.objects.all(), many=True).data
         return JsonResponse({ 'employments': employments })
 
     @staticmethod
@@ -39,10 +39,10 @@ class ApiView:
 
     @staticmethod
     def get_cv(_, cv_id):
-        cv = CvSerializer(Cv.objects.get(pk=cv_id)).data
+        cv = CvSerializer(Cv.objects.get(pk=cv_id), many=True).data
         return JsonResponse({ 'cv': cv })
 
     @staticmethod
-    def get_all_cv(request):
-        cvs = CvSerializer(Cv.objects.all()).data
+    def get_all_cv(_):
+        cvs = CvSerializer(Cv.objects.all(), many=True).data
         return JsonResponse({ 'cvs': cvs })

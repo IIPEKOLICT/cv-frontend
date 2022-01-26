@@ -54,5 +54,11 @@ docs = [
         'GET',
         '/api/project',
         []
+    ),
+    Doc(
+        'Get contacts',
+        'GET',
+        '/api/contact',
+        []
     )
 ]

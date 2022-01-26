@@ -2,68 +2,68 @@ from django.db import models
 
 
 class Contact(models.Model):
-    contact_name = models.CharField(max_length=50, blank=True)
-    contact_icon = models.ImageField(upload_to='assets/contacts')
-    contact_link = models.URLField()
+    name = models.CharField(max_length=50, blank=True)
+    icon = models.ImageField(upload_to='assets/contacts')
+    link = models.URLField()
 
     class Meta:
         verbose_name_plural = 'contacts'
 
     def __str__(self):
-        return self.contact_name or self.contact_link
+        return self.name or self.link
 
 
 class Education(models.Model):
-    education_place = models.CharField(max_length=100)
-    education_speciality = models.CharField(max_length=50)
-    education_years = models.CharField(max_length=20)
+    place = models.CharField(max_length=100)
+    speciality = models.CharField(max_length=50)
+    years = models.CharField(max_length=20)
 
     class Meta:
         verbose_name_plural = 'educations'
-        ordering = ['education_years']
+        ordering = ['years']
 
     def __str__(self):
-        return self.education_place
+        return self.place
 
 
 class Employment(models.Model):
-    employment_place = models.CharField(max_length=100)
-    employment_desc = models.TextField()
-    employment_period = models.CharField(max_length=30)
+    place = models.CharField(max_length=100)
+    desc = models.TextField()
+    period = models.CharField(max_length=30)
 
     class Meta:
         verbose_name_plural = 'employments'
 
     def __str__(self):
-        return self.employment_place
+        return self.place
 
 
 class Technology(models.Model):
-    technology_name = models.CharField(max_length=30)
-    technology_logo = models.ImageField(upload_to='assets/technologies')
+    name = models.CharField(max_length=30)
+    logo = models.ImageField(upload_to='assets/technologies')
 
     class Meta:
         verbose_name_plural = 'technologies'
-        ordering = ['technology_name']
+        ordering = ['name']
 
     def __str__(self):
-        return self.technology_name
+        return self.name
 
 
 class Project(models.Model):
-    project_name = models.CharField(max_length=50)
-    project_description = models.TextField()
-    project_techs = models.ManyToManyField(to=Technology)
-    project_deploy = models.URLField(blank=True)
-    project_repo = models.URLField(blank=True)
-    project_date = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    techs = models.ManyToManyField(to=Technology)
+    deploy = models.URLField(blank=True)
+    repo = models.URLField(blank=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = 'projects'
-        ordering = ['project_date']
+        ordering = ['date']
 
     def __str__(self):
-        return self.project_name
+        return self.name
 
 
 class Cv(models.Model):

@@ -2,51 +2,61 @@ from rest_framework import serializers
 from .models import *
 
 class ContactSerializer(serializers.ModelSerializer):
-    contact_icon = serializers.SerializerMethodField()
+    icon = serializers.SerializerMethodField()
 
     def get_icon(self, contact):
         request = self.context.get('request')
-        return request.build_absolute_uri(contact.contact_icon.url)
+        return request.build_absolute_uri(contact.icon.url)
 
     class Meta:
         model = Contact
-        fields = ('id', 'contact_name', 'contact_icon', 'contact_link')
+        fields = ('id', 'name', 'icon', 'link')
 
 class EducationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Education
-        fields = ('id', 'education_place', 'education_speciality', 'education_years')
+        fields = ('id', 'place', 'speciality', 'years')
 
 class EmploymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employment
-        fields = ('id', 'employment_place', 'employment_desc', 'employment_period')
+        fields = ('id', 'place', 'desc', 'period')
 
 class TechnologySerializer(serializers.ModelSerializer):
-    technology_logo = serializers.SerializerMethodField()
+    logo = serializers.SerializerMethodField()
 
-    def get_technology_logo(self, technology):
+    def get_logo(self, technology):
         request = self.context.get('request')
-        return request.build_absolute_uri(technology.technology_logo.url)
+        return request.build_absolute_uri(technology.logo.url)
 
     class Meta:
         model = Technology
-        fields = ('id', 'technology_name', 'technology_logo')
+        fields = ('id', 'name', 'logo')
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = (
             'id',
-            'project_name',
-            'project_description',
-            'project_techs',
-            'project_deploy',
-            'project_repo',
-            'project_date'
+            'name',
+            'description',
+            'techs',
+            'deploy',
+            'repo',
+            'date'
         )
 
 class CvSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cv
-        fields = ('id', 'name', 'job', 'about', 'contacts', 'educations', 'english', 'technologies', 'projects')
+        fields = (
+            'id',
+            'name',
+            'job',
+            'about',
+            'contacts',
+            'educations',
+            'english',
+            'technologies',
+            'projects'
+        )
