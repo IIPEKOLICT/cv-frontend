@@ -1,5 +1,5 @@
 class Param:
-    def __init__(self, name, param_type, desc=''):
+    def __init__(self, name: str, param_type: str, desc=''):
         self.param_type = param_type
         self.desc = desc
         self.name = name
@@ -8,7 +8,7 @@ class Param:
         return f'(name: {self.name}, param_type: {self.param_type} desc: {self.desc})'
 
 class Doc:
-    def __init__(self, title, method, path, params):
+    def __init__(self, title: str, method: str, path: str, params):
         self.method = method
         self.params = params
         self.path = path
@@ -22,13 +22,37 @@ docs = [
     Doc(
         'Get cvs',
         'GET',
-        '/cv',
+        '/api/cv',
         []
     ),
     Doc(
         'Get current cv',
         'GET',
-        '/cv',
+        '/api/cv',
         [Param('id', 'integer', 'cv id')]
+    ),
+    Doc(
+        'Get technologies',
+        'GET',
+        '/api/technology',
+        []
+    ),
+    Doc(
+        'Get educations',
+        'GET',
+        '/api/education',
+        []
+    ),
+    Doc(
+        'Get employments',
+        'GET',
+        '/api/employment',
+        []
+    ),
+    Doc(
+        'Get projects',
+        'GET',
+        '/api/project',
+        []
     )
 ]
