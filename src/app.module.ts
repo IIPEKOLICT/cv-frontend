@@ -1,24 +1,18 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { CLIENT_DIR_PATH, PUBLIC_DIR_PATH } from './configs/file.paths';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { dbConfig } from './configs/db.config';
+import { staticConfig } from './configs/static.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    ServeStaticModule.forRoot({
-      rootPath: PUBLIC_DIR_PATH,
-      serveRoot: '/'
-    }),
-    ServeStaticModule.forRoot({
-      rootPath: CLIENT_DIR_PATH,
-      serveRoot: '/',
-    }),
+    ServeStaticModule.forRoot(staticConfig),
+    TypeOrmModule.forRoot(dbConfig)
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
