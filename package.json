@@ -22,8 +22,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "install:ng": "npm install -g @angular/cli",
-    "heroku-postbuild": "npm install:ng && cd client && npm install --only=dev && npm install && npm run build"
+    "install:ng": "npm install @angular/cli",
+    "install:deps": "npm install --only=dev && npm install",
+    "heroku-postbuild": "npm run install:ng && cd client && npm run install:deps && npm run build"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
