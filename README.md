@@ -1,10 +1,12 @@
 *cv*
-## Django CV app
-My Django + PostgreSQL CV app
+## Nest api app for my CV
+My NestJS + PostgreSQL CV api app
 
-[Cheat sheet](CHEATSHEET.md)
-
-[API reference](API.md)
+Environment vars:
+- `PORT` server port
+- `NODE_ENV` run mode
+- `ADMIN_LOGIN` login for get access to admin panel
+- `ADMIN PASSWORD` password for get access to admin panel
 
 Setup PostgreSQl DB:
 ```shell
@@ -13,15 +15,21 @@ create database cv;
 \q
 ```
 
-Load project:
+Prepare project:
 ```shell
 git clone git@github.com:IIPEKOLICT/cv.git
 cd cv
-pip install -r requirements.txt
-python manage.py runserver
+npm i && cd client && npm i
 ```
 
-Create superuser:
+Start project (development):
 ```shell
-python manage.py createsuperuser
+npm run dev
 ```
+
+Start project (production):
+```shell
+npm run start
+```
+
+[Nest guide](NEST.md)
