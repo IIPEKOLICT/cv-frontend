@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class PatchContactDto {
-  @ApiProperty() readonly id: number;
+export class ContactDto {
   @ApiProperty() readonly name: string;
   @ApiProperty() readonly link: string;
 }

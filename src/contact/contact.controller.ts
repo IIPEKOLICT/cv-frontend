@@ -13,16 +13,10 @@ import { Field, Route } from '../shared/enums';
 import { ContactService } from './contact.service';
 import { Observable } from 'rxjs';
 import { Contact } from './contact';
-import { PostContactDto } from './dto/post-contact.dto';
+import { ContactDto } from './dto/contact.dto';
 import { FileService } from '../file/file.service';
-import { PatchContactDto } from './dto/patch-contact.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import {
-  ApiForbiddenResponse,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ContactOperation } from '../shared/docs';
 
 @ApiTags(Route.Contact)
@@ -45,7 +39,7 @@ export class ContactController {
   @Post()
   @UseInterceptors(FileInterceptor(Field.Icon))
   async create(
-    @Body() dto: PostContactDto,
+    @Body() dto: ContactDto,
     @UploadedFile() image,
   ): Promise<Observable<Contact>> {
     const icon = await this.fileService.create(image);
@@ -54,14 +48,15 @@ export class ContactController {
 
   @ApiOperation({ summary: ContactOperation.Change })
   @ApiResponse({ type: Contact })
-  @Patch()
+  @Patch(`:${Field.Id}`)
   @UseInterceptors(FileInterceptor(Field.Icon))
   async change(
-    @Body() dto: PatchContactDto,
+    @Param(Field.Id) id: number,
+    @Body() dto: ContactDto,
     @UploadedFile() image,
   ): Promise<Observable<Contact>> {
     const icon = await this.fileService.create(image);
-    return this.contactService.change(dto.id, dto.name, dto.link, icon);
+    return this.contactService.change(id, dto.name, dto.link, icon);
   }
 
   @ApiOperation({ summary: ContactOperation.Delete })

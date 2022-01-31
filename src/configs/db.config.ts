@@ -6,5 +6,5 @@ export const dbConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   url: process.env.DATABASE_URL || LOCAL_DATABASE_URL,
   entities: [Contact],
-  synchronize: process.env.NODE_ENV !== 'production',
+  synchronize: true,
 };
