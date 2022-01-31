@@ -5,9 +5,11 @@ My NestJS + PostgreSQL CV api app
 Environment vars:
 - `PORT` server port
 - `NODE_ENV` run mode
-- `POSTGRES_URL` database url
+- `DATABASE_URL` database url
 - `ADMIN_LOGIN` login for get access to admin panel
 - `ADMIN_PASSWORD` password for get access to admin panel
+
+For heroku you need to set `PGSSLMODE`=no-verify (important)
 
 Setup PostgreSQl DB:
 ```shell
