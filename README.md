@@ -19,7 +19,7 @@ Prepare project:
 ```shell
 git clone git@github.com:IIPEKOLICT/cv.git
 cd cv
-npm i && cd client && npm i
+npm i
 ```
 
 Start project (development):

@@ -5,12 +5,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { dbConfig } from './configs/db.config';
 import { staticConfig } from './configs/static.config';
+import { ContactModule } from './contact/contact.module';
+import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     ServeStaticModule.forRoot(staticConfig),
-    TypeOrmModule.forRoot(dbConfig)
+    TypeOrmModule.forRoot(dbConfig),
+    ContactModule,
+    FileModule,
   ],
   controllers: [],
   providers: [],

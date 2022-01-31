@@ -5,6 +5,7 @@ import {
   LOCAL_POSTGRES_PORT,
   LOCAL_POSTGRES_USERNAME,
 } from './local-vars.config';
+import { Contact } from '../contact/contact';
 
 export const dbConfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -13,6 +14,6 @@ export const dbConfig: TypeOrmModuleOptions = {
   username: process.env.POSTGRES_USERNAME || LOCAL_POSTGRES_USERNAME,
   password: process.env.POSTGRES_PASSWORD || LOCAL_POSTGRES_PASSWORD,
   database: 'cv',
-  entities: ['dist/**/*.entity{.ts,.js}'],
+  entities: [Contact],
   synchronize: process.env.NODE_ENV !== 'production',
 };

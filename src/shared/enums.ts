@@ -5,5 +5,14 @@ export enum Route {
   Employment = 'employment',
   Project = 'project',
   Tech = 'tech',
-  Contact = 'contact'
+  Contact = 'contact',
+}
+
+export enum ErrorMessage {
+  CantWrite = 'Cant write file',
+}
+
+export enum Field {
+  Id = 'id',
+  Icon = 'icon',
 }

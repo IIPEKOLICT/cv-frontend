@@ -18,6 +18,8 @@ async function bootstrap() {
   const apiDocument = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('', app, apiDocument);
 
-  await app.listen(port, () => console.log(`Server has been started on port ${port}`));
+  await app.listen(port, () =>
+    console.log(`Server has been started on port ${port}`),
+  );
 }
 bootstrap().then();
