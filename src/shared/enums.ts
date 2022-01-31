@@ -4,7 +4,7 @@ export enum Route {
   Education = 'education',
   Employment = 'employment',
   Project = 'project',
-  Tech = 'tech',
+  Technology = 'technology',
   Contact = 'contact',
 }
 

@@ -17,7 +17,7 @@ import { ContactDto } from './dto/contact.dto';
 import { FileService } from '../file/file.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ContactOperation } from '../shared/docs';
+import { ContactOperation, TechnologyOperation } from '../shared/docs';
 
 @ApiTags(Route.Contact)
 @Controller(Route.Contact)
@@ -27,7 +27,7 @@ export class ContactController {
     private readonly fileService: FileService,
   ) {}
 
-  @ApiOperation({ summary: ContactOperation.Get })
+  @ApiOperation({ summary: TechnologyOperation.Get })
   @ApiResponse({ type: [Contact] })
   @Get()
   getAll(): Observable<Contact[]> {
