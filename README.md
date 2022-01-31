@@ -7,7 +7,7 @@ Environment vars:
 - `NODE_ENV` run mode
 - `DATABASE_URL` database url
 - `ADMIN_LOGIN` login for get access to admin panel
-- `ADMIN PASSWORD` password for get access to admin panel
+- `ADMIN_PASSWORD` password for get access to admin panel
 
 Setup PostgreSQl DB:
 ```shell
