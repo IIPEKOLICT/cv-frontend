@@ -11,3 +11,10 @@ export enum TechnologyOperation {
   Change = 'Change existing technology',
   Delete = 'Delete technology',
 }
+
+export enum ProjectOperation {
+  Get = 'Get projects',
+  Create = 'Create new project',
+  Change = 'Change existing project',
+  Delete = 'Delete project',
+}

@@ -8,6 +8,6 @@ import { FileService } from '../file/file.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Technology])],
   controllers: [TechnologyController],
-  providers: [TechnologyService, FileService]
+  providers: [TechnologyService, FileService],
 })
 export class TechnologyModule {}

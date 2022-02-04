@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
+  Put,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -48,7 +48,7 @@ export class ContactController {
 
   @ApiOperation({ summary: ContactOperation.Change })
   @ApiResponse({ type: Contact })
-  @Patch(`:${Field.Id}`)
+  @Put(`:${Field.Id}`)
   @UseInterceptors(FileInterceptor(Field.Icon))
   async change(
     @Param(Field.Id) id: number,

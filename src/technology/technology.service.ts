@@ -7,15 +7,27 @@ import { from, map, Observable, switchMap } from 'rxjs';
 @Injectable()
 export class TechnologyService {
   constructor(
-    @InjectRepository(Technology) private readonly techRepository: Repository<Technology>,
+    @InjectRepository(Technology)
+    private readonly techRepository: Repository<Technology>,
   ) {}
 
   getAll(): Observable<Technology[]> {
     return from(this.techRepository.find());
   }
 
-  getOne(id: number): Observable<Technology> {
-    return from(this.techRepository.findOne({ id }));
+  async getOne(id: number): Promise<Technology> {
+    return this.techRepository.findOne({ id });
+  }
+
+  async getTechnologies(ids: number[]): Promise<Technology[]> {
+    const technologies: Technology[] = [];
+
+    for (const id of ids) {
+      const technology: Technology = await this.getOne(id);
+      technologies.push(technology);
+    }
+
+    return technologies;
   }
 
   create(name: string, icon: string): Observable<Technology> {
@@ -26,7 +38,7 @@ export class TechnologyService {
 
   change(id: number, name: string, icon: string): Observable<Technology> {
     return from(this.techRepository.update(id, { name, icon })).pipe(
-      switchMap(() => this.getOne(id)),
+      switchMap(() => from(this.getOne(id))),
     );
   }
 

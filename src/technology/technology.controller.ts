@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Field, Route } from '../shared/enums';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FileService } from '../file/file.service';
@@ -15,7 +25,7 @@ import { ContactDto } from '../contact/dto/contact.dto';
 export class TechnologyController {
   constructor(
     private readonly fileService: FileService,
-    private readonly technologyService: TechnologyService
+    private readonly technologyService: TechnologyService,
   ) {}
 
   @ApiOperation({ summary: TechnologyOperation.Get })
@@ -39,7 +49,7 @@ export class TechnologyController {
 
   @ApiOperation({ summary: TechnologyOperation.Change })
   @ApiResponse({ type: Technology })
-  @Patch(`:${Field.Id}`)
+  @Put(`:${Field.Id}`)
   @UseInterceptors(FileInterceptor(Field.Icon))
   async change(
     @Param(Field.Id) id: number,
@@ -54,6 +64,6 @@ export class TechnologyController {
   @ApiResponse({ type: Number })
   @Delete(`:${Field.Id}`)
   delete(@Param(Field.Id) id: number): Observable<number> {
-    return this.technologyService.delete(id)
+    return this.technologyService.delete(id);
   }
 }

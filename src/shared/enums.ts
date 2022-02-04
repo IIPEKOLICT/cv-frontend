@@ -15,4 +15,5 @@ export enum ErrorMessage {
 export enum Field {
   Id = 'id',
   Icon = 'icon',
+  TechnologiesIds = 'technologies',
 }

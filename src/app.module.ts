@@ -8,6 +8,7 @@ import { staticConfig } from './configs/static.config';
 import { ContactModule } from './contact/contact.module';
 import { FileModule } from './file/file.module';
 import { TechnologyModule } from './technology/technology.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { TechnologyModule } from './technology/technology.module';
     ContactModule,
     FileModule,
     TechnologyModule,
+    ProjectModule,
   ],
   controllers: [],
   providers: [],
