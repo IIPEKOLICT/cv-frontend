@@ -9,6 +9,7 @@ import { ContactModule } from './contact/contact.module';
 import { FileModule } from './file/file.module';
 import { TechnologyModule } from './technology/technology.module';
 import { ProjectModule } from './project/project.module';
+import { EducationModule } from './education/education.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ProjectModule } from './project/project.module';
     FileModule,
     TechnologyModule,
     ProjectModule,
+    EducationModule,
   ],
   controllers: [],
   providers: [],

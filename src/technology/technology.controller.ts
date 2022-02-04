@@ -41,10 +41,10 @@ export class TechnologyController {
   @UseInterceptors(FileInterceptor(Field.Icon))
   async create(
     @Body() dto: TechnologyDto,
-    @UploadedFile() image,
+    @UploadedFile() image: Express.Multer.File,
   ): Promise<Observable<Technology>> {
     const icon = await this.fileService.create(image);
-    return this.technologyService.create(dto.name, icon);
+    return this.technologyService.create(dto, icon);
   }
 
   @ApiOperation({ summary: TechnologyOperation.Change })
@@ -54,10 +54,10 @@ export class TechnologyController {
   async change(
     @Param(Field.Id) id: number,
     @Body() dto: ContactDto,
-    @UploadedFile() image,
+    @UploadedFile() image: Express.Multer.File,
   ): Promise<Observable<Technology>> {
     const icon = await this.fileService.create(image);
-    return this.technologyService.change(id, dto.name, icon);
+    return this.technologyService.change(id, dto, icon);
   }
 
   @ApiOperation({ summary: TechnologyOperation.Delete })

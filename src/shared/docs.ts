@@ -18,3 +18,10 @@ export enum ProjectOperation {
   Change = 'Change existing project',
   Delete = 'Delete project',
 }
+
+export enum EducationOperation {
+  Get = 'Get educations',
+  Create = 'Create new education',
+  Change = 'Change existing education',
+  Delete = 'Delete education',
+}

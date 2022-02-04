@@ -40,10 +40,10 @@ export class ContactController {
   @UseInterceptors(FileInterceptor(Field.Icon))
   async create(
     @Body() dto: ContactDto,
-    @UploadedFile() image,
+    @UploadedFile() image: Express.Multer.File,
   ): Promise<Observable<Contact>> {
     const icon = await this.fileService.create(image);
-    return this.contactService.create(dto.name, dto.link, icon);
+    return this.contactService.create(dto, icon);
   }
 
   @ApiOperation({ summary: ContactOperation.Change })
@@ -53,10 +53,10 @@ export class ContactController {
   async change(
     @Param(Field.Id) id: number,
     @Body() dto: ContactDto,
-    @UploadedFile() image,
+    @UploadedFile() image: Express.Multer.File,
   ): Promise<Observable<Contact>> {
     const icon = await this.fileService.create(image);
-    return this.contactService.change(id, dto.name, dto.link, icon);
+    return this.contactService.change(id, dto, icon);
   }
 
   @ApiOperation({ summary: ContactOperation.Delete })

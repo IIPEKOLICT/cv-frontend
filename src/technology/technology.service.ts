@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Technology } from './technology';
 import { Repository } from 'typeorm';
 import { from, map, Observable, switchMap } from 'rxjs';
+import { TechnologyDto } from './dto/technology.dto';
 
 @Injectable()
 export class TechnologyService {
@@ -30,14 +31,14 @@ export class TechnologyService {
     return technologies;
   }
 
-  create(name: string, icon: string): Observable<Technology> {
+  create(dto: TechnologyDto, icon: string): Observable<Technology> {
     return from(
-      this.techRepository.save(this.techRepository.create({ name, icon })),
+      this.techRepository.save(this.techRepository.create({ ...dto, icon })),
     );
   }
 
-  change(id: number, name: string, icon: string): Observable<Technology> {
-    return from(this.techRepository.update(id, { name, icon })).pipe(
+  change(id: number, dto: TechnologyDto, icon: string): Observable<Technology> {
+    return from(this.techRepository.update({ id }, { ...dto, icon })).pipe(
       switchMap(() => from(this.getOne(id))),
     );
   }

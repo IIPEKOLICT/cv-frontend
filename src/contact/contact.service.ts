@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Contact } from './contact';
 import { from, map, Observable, switchMap } from 'rxjs';
+import { ContactDto } from './dto/contact.dto';
 
 @Injectable()
 export class ContactService {
@@ -11,30 +12,25 @@ export class ContactService {
     private readonly contactRepository: Repository<Contact>,
   ) {}
 
-  getOne(id: number): Observable<Contact> {
-    return from(this.contactRepository.findOne({ id }));
+  async getOne(id: number): Promise<Contact> {
+    return this.contactRepository.findOne({ id });
   }
 
   getAll(): Observable<Contact[]> {
     return from(this.contactRepository.find());
   }
 
-  create(name: string, link: string, icon: string): Observable<Contact> {
+  create(dto: ContactDto, icon: string): Observable<Contact> {
     return from(
       this.contactRepository.save(
-        this.contactRepository.create({ name, icon, link }),
+        this.contactRepository.create({ ...dto, icon }),
       ),
     );
   }
 
-  change(
-    id: number,
-    name: string,
-    link: string,
-    icon: string,
-  ): Observable<Contact> {
-    return from(this.contactRepository.update(id, { name, link, icon })).pipe(
-      switchMap(() => this.getOne(id)),
+  change(id: number, dto: ContactDto, icon: string): Observable<Contact> {
+    return from(this.contactRepository.update({ id }, { ...dto, icon })).pipe(
+      switchMap(() => from(this.getOne(id))),
     );
   }
 

@@ -8,7 +8,7 @@ import { ErrorMessage } from '../shared/enums';
 
 @Injectable()
 export class FileService {
-  async create(file: any): Promise<string> {
+  async create(file: Express.Multer.File): Promise<string> {
     try {
       const fileName = `${v4()}.png`;
 
