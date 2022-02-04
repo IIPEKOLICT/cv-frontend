@@ -14,16 +14,11 @@ import { Observable } from 'rxjs';
 import { Project } from './project';
 import { ProjectOperation } from '../shared/docs';
 import { ProjectDto } from './dto/project.dto';
-import { TechnologyService } from '../technology/technology.service';
-import { Technology } from '../technology/technology';
 
 @ApiTags(Route.Project)
 @Controller(Route.Project)
 export class ProjectController {
-  constructor(
-    private readonly projectService: ProjectService,
-    private readonly technologyService: TechnologyService
-  ) {}
+  constructor(private readonly projectService: ProjectService) {}
 
   @ApiOperation({ summary: ProjectOperation.Get })
   @ApiResponse({ type: [Project] })
@@ -36,9 +31,7 @@ export class ProjectController {
   @ApiResponse({ type: Project })
   @Post()
   async create(@Body() dto: ProjectDto): Promise<Observable<Project>> {
-    const technologies: Technology[] =
-      await this.technologyService.getTechnologies(dto.technologies);
-    return this.projectService.create(dto, technologies);
+    return this.projectService.create(dto);
   }
 
   @ApiOperation({ summary: ProjectOperation.Change })
@@ -48,9 +41,7 @@ export class ProjectController {
     @Param(Field.Id) id: number,
     @Body() dto: ProjectDto
   ): Promise<Observable<Project>> {
-    const technologies: Technology[] =
-      await this.technologyService.getTechnologies(dto.technologies);
-    return this.projectService.change(id, dto, technologies);
+    return this.projectService.change(id, dto);
   }
 
   @ApiOperation({ summary: ProjectOperation.Delete })
