@@ -25,3 +25,10 @@ export enum EducationOperation {
   Change = 'Change existing education',
   Delete = 'Delete education',
 }
+
+export enum EmploymentOperation {
+  Get = 'Get employments',
+  Create = 'Create new employment',
+  Change = 'Change existing employment',
+  Delete = 'Delete employment',
+}

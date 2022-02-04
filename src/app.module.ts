@@ -10,6 +10,7 @@ import { FileModule } from './file/file.module';
 import { TechnologyModule } from './technology/technology.module';
 import { ProjectModule } from './project/project.module';
 import { EducationModule } from './education/education.module';
+import { EmploymentModule } from './employment/employment.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { EducationModule } from './education/education.module';
     TechnologyModule,
     ProjectModule,
     EducationModule,
+    EmploymentModule,
   ],
   controllers: [],
   providers: [],
