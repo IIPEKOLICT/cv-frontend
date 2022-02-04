@@ -8,7 +8,11 @@ import { ErrorMessage } from '../shared/enums';
 
 @Injectable()
 export class FileService {
-  async create(file: Express.Multer.File): Promise<string> {
+  async create(file?: Express.Multer.File): Promise<string> {
+    if (!file) {
+      return '';
+    }
+
     try {
       const fileName = `${v4()}.png`;
 
@@ -21,7 +25,7 @@ export class FileService {
     } catch (e) {
       throw new HttpException(
         ErrorMessage.CantWrite,
-        HttpStatus.INTERNAL_SERVER_ERROR,
+        HttpStatus.INTERNAL_SERVER_ERROR
       );
     }
   }

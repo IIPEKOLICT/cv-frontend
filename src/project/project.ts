@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Technology } from '../technology/technology';
+import { Cv } from '../cv/cv';
 
 @Entity()
 export class Project {
@@ -20,4 +21,7 @@ export class Project {
   @ManyToMany(() => Technology, (technology: Technology) => technology.projects)
   @JoinTable()
   technologies: Technology[];
+
+  @ManyToMany(() => Cv, (cv: Cv) => cv.projects, { cascade: true })
+  cvs: Cv[];
 }

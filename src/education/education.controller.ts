@@ -5,7 +5,8 @@ import {
   Get,
   Param,
   Post,
-  Put, ValidationPipe,
+  Put,
+  ValidationPipe,
 } from '@nestjs/common';
 import { Field, Route } from '../shared/enums';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -39,7 +40,7 @@ export class EducationController {
   @Put(`:${Field.Id}`)
   change(
     @Param(Field.Id) id: number,
-    @Body() dto: EducationDto,
+    @Body() dto: EducationDto
   ): Observable<Education> {
     return this.educationService.change(id, dto);
   }

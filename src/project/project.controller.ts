@@ -22,7 +22,7 @@ import { Technology } from '../technology/technology';
 export class ProjectController {
   constructor(
     private readonly projectService: ProjectService,
-    private readonly technologyService: TechnologyService,
+    private readonly technologyService: TechnologyService
   ) {}
 
   @ApiOperation({ summary: ProjectOperation.Get })
@@ -46,7 +46,7 @@ export class ProjectController {
   @Put(`:${Field.Id}`)
   async change(
     @Param(Field.Id) id: number,
-    @Body() dto: ProjectDto,
+    @Body() dto: ProjectDto
   ): Promise<Observable<Project>> {
     const technologies: Technology[] =
       await this.technologyService.getTechnologies(dto.technologies);

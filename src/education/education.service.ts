@@ -9,7 +9,7 @@ import { EducationDto } from './dto/education.dto';
 export class EducationService {
   constructor(
     @InjectRepository(Education)
-    private readonly educationRepository: Repository<Education>,
+    private readonly educationRepository: Repository<Education>
   ) {}
 
   getAll(): Observable<Education[]> {
@@ -22,15 +22,13 @@ export class EducationService {
 
   create(dto: EducationDto): Observable<Education> {
     return from(
-      this.educationRepository.save(
-        this.educationRepository.create({ ...dto }),
-      ),
+      this.educationRepository.save(this.educationRepository.create({ ...dto }))
     );
   }
 
   change(id: number, dto: EducationDto): Observable<Education> {
     return from(this.educationRepository.update(id, { ...dto })).pipe(
-      switchMap(() => from(this.getOne(id))),
+      switchMap(() => from(this.getOne(id)))
     );
   }
 

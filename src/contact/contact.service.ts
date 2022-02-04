@@ -9,7 +9,7 @@ import { ContactDto } from './dto/contact.dto';
 export class ContactService {
   constructor(
     @InjectRepository(Contact)
-    private readonly contactRepository: Repository<Contact>,
+    private readonly contactRepository: Repository<Contact>
   ) {}
 
   async getOne(id: number): Promise<Contact> {
@@ -23,15 +23,21 @@ export class ContactService {
   create(dto: ContactDto, icon: string): Observable<Contact> {
     return from(
       this.contactRepository.save(
-        this.contactRepository.create({ ...dto, icon }),
-      ),
+        this.contactRepository.create({ ...dto, icon })
+      )
     );
   }
 
   change(id: number, dto: ContactDto, icon: string): Observable<Contact> {
-    return from(this.contactRepository.update({ id }, { ...dto, icon })).pipe(
-      switchMap(() => from(this.getOne(id))),
-    );
+    const updatedFields: ContactDto & { icon?: string } = dto;
+
+    if (icon) {
+      updatedFields.icon = icon;
+    }
+
+    return from(
+      this.contactRepository.update({ id }, { ...updatedFields })
+    ).pipe(switchMap(() => from(this.getOne(id))));
   }
 
   delete(id: number): Observable<number> {

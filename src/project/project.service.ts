@@ -10,7 +10,7 @@ import { Technology } from '../technology/technology';
 export class ProjectService {
   constructor(
     @InjectRepository(Project)
-    private readonly projectRepository: Repository<Project>,
+    private readonly projectRepository: Repository<Project>
   ) {}
 
   getAll(): Observable<Project[]> {
@@ -23,7 +23,7 @@ export class ProjectService {
 
   async create(
     dto: ProjectDto,
-    technologies: Technology[],
+    technologies: Technology[]
   ): Promise<Observable<Project>> {
     return from(
       this.projectRepository.save(
@@ -33,15 +33,15 @@ export class ProjectService {
           repo: dto.repo,
           deploy: dto.deploy,
           technologies,
-        }),
-      ),
+        })
+      )
     );
   }
 
   async change(
     id: number,
     dto: ProjectDto,
-    technologies: Technology[],
+    technologies: Technology[]
   ): Promise<Observable<Project>> {
     const project: Project = await this.getOne(id);
 

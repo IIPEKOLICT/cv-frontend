@@ -24,7 +24,7 @@ import { ContactOperation, TechnologyOperation } from '../shared/docs';
 export class ContactController {
   constructor(
     private readonly contactService: ContactService,
-    private readonly fileService: FileService,
+    private readonly fileService: FileService
   ) {}
 
   @ApiOperation({ summary: TechnologyOperation.Get })
@@ -40,7 +40,7 @@ export class ContactController {
   @UseInterceptors(FileInterceptor(Field.Icon))
   async create(
     @Body() dto: ContactDto,
-    @UploadedFile() image: Express.Multer.File,
+    @UploadedFile() image?: Express.Multer.File
   ): Promise<Observable<Contact>> {
     const icon = await this.fileService.create(image);
     return this.contactService.create(dto, icon);
@@ -53,7 +53,7 @@ export class ContactController {
   async change(
     @Param(Field.Id) id: number,
     @Body() dto: ContactDto,
-    @UploadedFile() image: Express.Multer.File,
+    @UploadedFile() image?: Express.Multer.File
   ): Promise<Observable<Contact>> {
     const icon = await this.fileService.create(image);
     return this.contactService.change(id, dto, icon);

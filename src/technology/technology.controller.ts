@@ -25,7 +25,7 @@ import { ContactDto } from '../contact/dto/contact.dto';
 export class TechnologyController {
   constructor(
     private readonly fileService: FileService,
-    private readonly technologyService: TechnologyService,
+    private readonly technologyService: TechnologyService
   ) {}
 
   @ApiOperation({ summary: TechnologyOperation.Get })
@@ -41,7 +41,7 @@ export class TechnologyController {
   @UseInterceptors(FileInterceptor(Field.Icon))
   async create(
     @Body() dto: TechnologyDto,
-    @UploadedFile() image: Express.Multer.File,
+    @UploadedFile() image?: Express.Multer.File
   ): Promise<Observable<Technology>> {
     const icon = await this.fileService.create(image);
     return this.technologyService.create(dto, icon);
@@ -54,7 +54,7 @@ export class TechnologyController {
   async change(
     @Param(Field.Id) id: number,
     @Body() dto: ContactDto,
-    @UploadedFile() image: Express.Multer.File,
+    @UploadedFile() image?: Express.Multer.File
   ): Promise<Observable<Technology>> {
     const icon = await this.fileService.create(image);
     return this.technologyService.change(id, dto, icon);

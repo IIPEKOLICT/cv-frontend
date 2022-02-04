@@ -32,3 +32,11 @@ export enum EmploymentOperation {
   Change = 'Change existing employment',
   Delete = 'Delete employment',
 }
+
+export enum CvOperation {
+  GetAll = 'Get all cvs',
+  GetCurrent = 'Get current cv',
+  Create = 'Create new cv',
+  Change = 'Change existing cv',
+  Delete = 'Delete cv',
+}

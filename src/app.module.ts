@@ -11,6 +11,7 @@ import { TechnologyModule } from './technology/technology.module';
 import { ProjectModule } from './project/project.module';
 import { EducationModule } from './education/education.module';
 import { EmploymentModule } from './employment/employment.module';
+import { CvModule } from './cv/cv.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { EmploymentModule } from './employment/employment.module';
     ProjectModule,
     EducationModule,
     EmploymentModule,
+    CvModule,
   ],
   controllers: [],
   providers: [],

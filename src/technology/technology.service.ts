@@ -9,7 +9,7 @@ import { TechnologyDto } from './dto/technology.dto';
 export class TechnologyService {
   constructor(
     @InjectRepository(Technology)
-    private readonly techRepository: Repository<Technology>,
+    private readonly techRepository: Repository<Technology>
   ) {}
 
   getAll(): Observable<Technology[]> {
@@ -33,13 +33,19 @@ export class TechnologyService {
 
   create(dto: TechnologyDto, icon: string): Observable<Technology> {
     return from(
-      this.techRepository.save(this.techRepository.create({ ...dto, icon })),
+      this.techRepository.save(this.techRepository.create({ ...dto, icon }))
     );
   }
 
   change(id: number, dto: TechnologyDto, icon: string): Observable<Technology> {
-    return from(this.techRepository.update({ id }, { ...dto, icon })).pipe(
-      switchMap(() => from(this.getOne(id))),
+    const updatedFields: TechnologyDto & { icon?: string } = dto;
+
+    if (icon) {
+      updatedFields.icon = icon;
+    }
+
+    return from(this.techRepository.update({ id }, { ...updatedFields })).pipe(
+      switchMap(() => from(this.getOne(id)))
     );
   }
 
