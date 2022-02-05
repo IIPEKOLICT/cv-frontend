@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { Field, Route } from '../shared/enums';
@@ -18,6 +19,8 @@ import { FileService } from '../file/file.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ContactOperation, TechnologyOperation } from '../shared/docs';
+import { Auth } from '../auth/auth.decorator';
+import { AuthGuard } from '../auth/auth.guard';
 
 @ApiTags(Route.Contact)
 @Controller(Route.Contact)
@@ -36,6 +39,8 @@ export class ContactController {
 
   @ApiOperation({ summary: ContactOperation.Create })
   @ApiResponse({ type: Contact })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor(Field.Icon))
   async create(
@@ -48,6 +53,8 @@ export class ContactController {
 
   @ApiOperation({ summary: ContactOperation.Change })
   @ApiResponse({ type: Contact })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Put(`:${Field.Id}`)
   @UseInterceptors(FileInterceptor(Field.Icon))
   async change(
@@ -61,6 +68,8 @@ export class ContactController {
 
   @ApiOperation({ summary: ContactOperation.Delete })
   @ApiResponse({ type: Number })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Delete(`:${Field.Id}`)
   delete(@Param(Field.Id) id: number): Observable<number> {
     return this.contactService.delete(id);

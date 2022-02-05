@@ -36,10 +36,7 @@ export class ProjectService {
     );
   }
 
-  async change(
-    id: number,
-    dto: ProjectDto
-  ): Promise<Observable<Project>> {
+  async change(id: number, dto: ProjectDto): Promise<Observable<Project>> {
     const project: Project = await this.getOne(id);
 
     project.name = dto.name;

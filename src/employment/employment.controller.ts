@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { Field, Route } from '../shared/enums';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -14,6 +15,8 @@ import { Observable } from 'rxjs';
 import { Employment } from './employment';
 import { EmploymentOperation } from '../shared/docs';
 import { EmploymentDto } from './dto/employment.dto';
+import { Auth } from '../auth/auth.decorator';
+import { AuthGuard } from '../auth/auth.guard';
 
 @ApiTags(Route.Employment)
 @Controller(Route.Employment)
@@ -29,6 +32,8 @@ export class EmploymentController {
 
   @ApiOperation({ summary: EmploymentOperation.Create })
   @ApiResponse({ type: Employment })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Post()
   create(@Body() dto: EmploymentDto): Observable<Employment> {
     return this.employmentService.create(dto);
@@ -36,6 +41,8 @@ export class EmploymentController {
 
   @ApiOperation({ summary: EmploymentOperation.Change })
   @ApiResponse({ type: Employment })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Put(`:${Field.Id}`)
   change(
     @Param(Field.Id) id: number,
@@ -46,6 +53,8 @@ export class EmploymentController {
 
   @ApiOperation({ summary: EmploymentOperation.Delete })
   @ApiResponse({ type: Number })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Delete(`:${Field.Id}`)
   delete(@Param(Field.Id) id: number): Observable<number> {
     return this.employmentService.delete(id);

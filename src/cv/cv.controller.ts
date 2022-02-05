@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   UploadedFile,
+  UseGuards,
 } from '@nestjs/common';
 import { Field, Route } from '../shared/enums';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -16,6 +17,8 @@ import { Cv } from './cv';
 import { CvOperation } from '../shared/docs';
 import { CvDto } from './dto/cv.dto';
 import { FileService } from '../file/file.service';
+import { Auth } from '../auth/auth.decorator';
+import { AuthGuard } from '../auth/auth.guard';
 
 @ApiTags(Route.Cv)
 @Controller(Route.Cv)
@@ -41,6 +44,8 @@ export class CvController {
 
   @ApiOperation({ summary: CvOperation.Create })
   @ApiResponse({ type: Cv })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Post()
   async create(
     @Body() dto: CvDto,
@@ -52,6 +57,8 @@ export class CvController {
 
   @ApiOperation({ summary: CvOperation.Change })
   @ApiResponse({ type: Cv })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Put(`:${Field.Id}`)
   async change(
     @Param(Field.Id) id: number,
@@ -64,6 +71,8 @@ export class CvController {
 
   @ApiOperation({ summary: CvOperation.Delete })
   @ApiResponse({ type: Number })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Delete(`:${Field.Id}`)
   delete(@Param(Field.Id) id: number): Observable<number> {
     return this.cvService.delete(id);

@@ -12,6 +12,7 @@ import { ProjectModule } from './project/project.module';
 import { EducationModule } from './education/education.module';
 import { EmploymentModule } from './employment/employment.module';
 import { CvModule } from './cv/cv.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { CvModule } from './cv/cv.module';
     EducationModule,
     EmploymentModule,
     CvModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

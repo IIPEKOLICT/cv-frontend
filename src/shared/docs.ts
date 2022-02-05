@@ -40,3 +40,8 @@ export enum CvOperation {
   Change = 'Change existing cv',
   Delete = 'Delete cv',
 }
+
+export enum AuthOperation {
+  Auth = 'Authentication',
+  Login = 'Login',
+}

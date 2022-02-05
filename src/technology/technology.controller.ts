@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { Field, Route } from '../shared/enums';
@@ -19,6 +20,8 @@ import { TechnologyOperation } from '../shared/docs';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { TechnologyDto } from './dto/technology.dto';
 import { ContactDto } from '../contact/dto/contact.dto';
+import { Auth } from '../auth/auth.decorator';
+import { AuthGuard } from '../auth/auth.guard';
 
 @ApiTags(Route.Technology)
 @Controller(Route.Technology)
@@ -37,6 +40,8 @@ export class TechnologyController {
 
   @ApiOperation({ summary: TechnologyOperation.Create })
   @ApiResponse({ type: Technology })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor(Field.Icon))
   async create(
@@ -49,6 +54,8 @@ export class TechnologyController {
 
   @ApiOperation({ summary: TechnologyOperation.Change })
   @ApiResponse({ type: Technology })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Put(`:${Field.Id}`)
   @UseInterceptors(FileInterceptor(Field.Icon))
   async change(
@@ -62,6 +69,8 @@ export class TechnologyController {
 
   @ApiOperation({ summary: TechnologyOperation.Delete })
   @ApiResponse({ type: Number })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Delete(`:${Field.Id}`)
   delete(@Param(Field.Id) id: number): Observable<number> {
     return this.technologyService.delete(id);

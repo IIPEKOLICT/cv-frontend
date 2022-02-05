@@ -1,10 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { join } from 'path';
 import { existsSync } from 'fs';
 import { mkdir, writeFile } from 'fs/promises';
 import { v4 } from 'uuid';
 import { STATIC_DIR_PATH } from '../configs/static.config';
-import { ErrorMessage } from '../shared/enums';
+import { ApiError } from '../errors/api.error';
 
 @Injectable()
 export class FileService {
@@ -23,10 +23,7 @@ export class FileService {
       await writeFile(join(STATIC_DIR_PATH, fileName), file.buffer);
       return fileName;
     } catch (e) {
-      throw new HttpException(
-        ErrorMessage.CantWrite,
-        HttpStatus.INTERNAL_SERVER_ERROR
-      );
+      ApiError.filesystem();
     }
   }
 }

@@ -6,7 +6,7 @@ import {
   Param,
   Post,
   Put,
-  ValidationPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { Field, Route } from '../shared/enums';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -15,6 +15,8 @@ import { Observable } from 'rxjs';
 import { Education } from './education';
 import { EducationOperation } from '../shared/docs';
 import { EducationDto } from './dto/education.dto';
+import { Auth } from '../auth/auth.decorator';
+import { AuthGuard } from '../auth/auth.guard';
 
 @ApiTags(Route.Education)
 @Controller(Route.Education)
@@ -30,6 +32,8 @@ export class EducationController {
 
   @ApiOperation({ summary: EducationOperation.Create })
   @ApiResponse({ type: Education })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Post()
   create(@Body() dto: EducationDto): Observable<Education> {
     return this.educationService.create(dto);
@@ -37,6 +41,8 @@ export class EducationController {
 
   @ApiOperation({ summary: EducationOperation.Change })
   @ApiResponse({ type: Education })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Put(`:${Field.Id}`)
   change(
     @Param(Field.Id) id: number,
@@ -47,6 +53,8 @@ export class EducationController {
 
   @ApiOperation({ summary: EducationOperation.Delete })
   @ApiResponse({ type: Number })
+  @Auth()
+  @UseGuards(AuthGuard)
   @Delete(`:${Field.Id}`)
   delete(@Param(Field.Id) id: number): Observable<number> {
     return this.educationService.delete(id);
