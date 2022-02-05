@@ -5,6 +5,7 @@ My NestJS + PostgreSQL CV api app
 Environment vars:
 - `PORT` server port
 - `DATABASE_URL` database url
+- `JWT_SECRET` secret key for jwt tokens
 - `ADMIN_LOGIN` login for get access to admin panel
 - `ADMIN_PASSWORD` password for get access to admin panel
 
@@ -26,12 +27,12 @@ npm i
 
 Start project (development):
 ```shell
-npm run dev
+npm run start:dev
 ```
 
 Start project (production):
 ```shell
-npm run start
+npm run start:prod
 ```
 
 [Nest guide](NEST.md)
