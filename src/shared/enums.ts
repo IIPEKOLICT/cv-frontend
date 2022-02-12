@@ -21,4 +21,5 @@ export enum ErrorMessage {
 export enum Field {
   Id = 'id',
   Icon = 'icon',
+  Preview = 'preview'
 }

@@ -5,8 +5,8 @@ import {
   Get,
   Param,
   Post,
-  Put,
-  UseGuards,
+  Put, UploadedFile,
+  UseGuards, UseInterceptors,
 } from '@nestjs/common';
 import { Field, Route } from '../shared/enums';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -17,11 +17,16 @@ import { ProjectOperation } from '../shared/docs';
 import { ProjectDto } from './dto/project.dto';
 import { Auth } from '../auth/auth.decorator';
 import { AuthGuard } from '../auth/auth.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { FileService } from '../file/file.service';
 
 @ApiTags(Route.Project)
 @Controller(Route.Project)
 export class ProjectController {
-  constructor(private readonly projectService: ProjectService) {}
+  constructor(
+    private readonly projectService: ProjectService,
+    private readonly fileService: FileService
+  ) {}
 
   @ApiOperation({ summary: ProjectOperation.Get })
   @ApiResponse({ type: [Project] })
@@ -35,8 +40,13 @@ export class ProjectController {
   @Auth()
   @UseGuards(AuthGuard)
   @Post()
-  async create(@Body() dto: ProjectDto): Promise<Observable<Project>> {
-    return this.projectService.create(dto);
+  @UseInterceptors(FileInterceptor(Field.Preview))
+  async create(
+    @Body() dto: ProjectDto,
+    @UploadedFile() image?: Express.Multer.File
+  ): Promise<Observable<Project>> {
+    const preview = await this.fileService.create(image);
+    return this.projectService.create(dto, preview);
   }
 
   @ApiOperation({ summary: ProjectOperation.Change })
@@ -44,11 +54,14 @@ export class ProjectController {
   @Auth()
   @UseGuards(AuthGuard)
   @Put(`:${Field.Id}`)
+  @UseInterceptors(FileInterceptor(Field.Preview))
   async change(
     @Param(Field.Id) id: number,
-    @Body() dto: ProjectDto
+    @Body() dto: ProjectDto,
+    @UploadedFile() image?: Express.Multer.File
   ): Promise<Observable<Project>> {
-    return this.projectService.change(id, dto);
+    const preview = await this.fileService.create(image);
+    return this.projectService.change(id, dto, preview);
   }
 
   @ApiOperation({ summary: ProjectOperation.Delete })

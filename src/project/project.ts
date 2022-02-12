@@ -16,6 +16,7 @@ export class Project {
   @ApiProperty() @Column() description: string;
   @ApiProperty() @Column() deploy: string;
   @ApiProperty() @Column() repo: string;
+  @ApiProperty() @Column({ default: '' }) preview: string;
 
   @ApiProperty({ type: [Technology] })
   @ManyToMany(() => Technology, (technology: Technology) => technology.projects)
