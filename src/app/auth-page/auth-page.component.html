@@ -1,5 +1,10 @@
 <div class='auth-page'>
-  <form *ngIf='!isAuth' [formGroup]='form' (ngSubmit)='submitHandler()'>
+  <form
+    class='auth-page__form'
+    *ngIf='!isAuth'
+    [formGroup]='form'
+    (ngSubmit)='submitHandler()'
+  >
     <h2>Login</h2>
     <label>
       <input

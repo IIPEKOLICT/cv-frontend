@@ -1,3 +1,5 @@
+@import 'lib';
+
 * {
   margin: 0;
   transition: 0.3s ease-out;
@@ -18,6 +20,13 @@ a {
 .btn {
   cursor: pointer;
   outline: none;
+}
+
+.divider {
+  margin: size(1) 0;
+  width: 100%;
+  height: 1px;
+  background-color: $divider;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');

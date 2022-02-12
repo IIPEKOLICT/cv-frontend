@@ -5,5 +5,9 @@
   height: 100vh;
   @include flex(row, center, center);
 
-
+  &__form {
+    width: 150px;
+    @include flex(column, flex-start, center);
+    gap: size(1);
+  }
 }

@@ -1,36 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { AuthApiService } from './api/auth-api.service';
 import { TOKEN_KEY } from '../shared/constants';
+import { AuthResponse } from '../shared/responses';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private isAuth: Subject<boolean> = new Subject<boolean>();
 
-  constructor(
-    private readonly httpClient: HttpClient,
-    private readonly authApiService: AuthApiService
-  ) {
-    setTimeout(() => {
-      this.isAuth.next(true);
-    }, 3000)
-  }
+  constructor(private readonly authApiService: AuthApiService) {}
 
   getIsAuthStream(): Subject<boolean> {
     return this.isAuth;
   }
 
+  private authSubscriber(response: AuthResponse): void {
+    this.isAuth.next(true);
+    localStorage.setItem(TOKEN_KEY, `Bearer ${response.token}`);
+  }
+
   auth(): void {
-    // this.httpClient.get(`${API_URL}/auth`, {  })
+    this.authApiService.auth().subscribe(this.authSubscriber.bind(this));
   }
 
   login(login: string, password: string): void {
-    this.authApiService.login(login, password).subscribe((response: HttpResponse<string>) => {
-      console.log(response);
-      this.isAuth.next(true);
-      localStorage.setItem(TOKEN_KEY, response.body || '');
-    });
+    this.authApiService.login(login, password).subscribe(this.authSubscriber.bind(this));
   }
 
   logout(): void {

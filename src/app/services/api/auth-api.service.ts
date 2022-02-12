@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../../shared/constants';
+import { AuthResponse } from '../../shared/responses';
 
 @Injectable({ providedIn: 'root' })
 export class AuthApiService {
@@ -9,11 +10,11 @@ export class AuthApiService {
 
   constructor(private readonly httpClient: HttpClient) {}
 
-  auth(): Observable<string> {
-    return this.httpClient.get<string>(this.route);
+  auth(): Observable<AuthResponse> {
+    return this.httpClient.get<AuthResponse>(this.route);
   }
 
-  login(login: string, password: string): Observable<HttpResponse<string>> {
-    return this.httpClient.post<string>(this.route, { login, password }, { observe: 'response' });
+  login(login: string, password: string): Observable<AuthResponse> {
+    return this.httpClient.post<AuthResponse>(this.route, { login, password });
   }
 }
