@@ -1,0 +1,25 @@
+<nav class="menu">
+  <h2 class="menu__header">Menu</h2>
+  <ul class="menu__list">
+    <li
+      class="menu__item"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]='{ exact: true }'
+      *ngFor="let route of routes"
+    >
+      <a
+        [routerLink]="route.endPoint"
+        class="menu__link"
+      >
+        {{ route.title }}
+      </a>
+    </li>
+    <li
+      class='menu__item'
+      *ngIf='routes.length'
+      (click)='authService.logout()'
+    >
+      <a class='menu__link'>Logout</a>
+    </li>
+  </ul>
+</nav>

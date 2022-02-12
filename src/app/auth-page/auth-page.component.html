@@ -1,0 +1,30 @@
+<div class='auth-page'>
+  <form *ngIf='!isAuth' [formGroup]='form' (ngSubmit)='submitHandler()'>
+    <h2>Login</h2>
+    <label>
+      <input
+        type='text'
+        placeholder='Enter login'
+        [value]='loginControl?.value'
+        formControlName='login'
+      >
+    </label>
+    <label>
+      <input
+        type='password'
+        placeholder='Enter password'
+        [value]='passwordControl?.value'
+        formControlName='password'
+      >
+    </label>
+    <button
+      class='btn'
+      type='submit'
+      [disabled]='form.invalid'
+    >
+      Login
+    </button>
+  </form>
+
+  <h2 *ngIf='isAuth'>Already authorized</h2>
+</div>

@@ -1,0 +1,35 @@
+@import '../../lib';
+
+.menu {
+  height: 100vh;
+  position: fixed;
+  background-color: $secondary;
+
+  &__header {
+    width: 200px;
+    text-align: center;
+    padding: size(1) 0;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    height: 50px;
+
+    &:hover {
+      background-color: $hover;
+    }
+
+    &.active {
+      color: $accent;
+    }
+  }
+
+  &__link {
+    height: inherit;
+    @include flex(row, center, center);
+  }
+}
