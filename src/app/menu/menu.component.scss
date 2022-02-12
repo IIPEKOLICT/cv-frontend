@@ -26,6 +26,10 @@
     &.active {
       color: $accent;
     }
+
+    &--btn {
+      cursor: pointer;
+    }
   }
 
   &__link {

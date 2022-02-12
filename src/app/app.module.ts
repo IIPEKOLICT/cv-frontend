@@ -7,17 +7,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { MenuComponent } from './menu/menu.component';
-import { TechnologyPageComponent } from './technology-page/technology-page.component';
-import { ProjectPageComponent } from './project-page/project-page.component';
-import { AuthInterceptorProvider } from './shared/providers';
+import { AuthInterceptorProvider } from '../shared/providers';
+import { EmploymentsPageComponent } from './employments-page/employments-page.component';
+import { EducationsPageComponent } from './educations-page/educations-page.component';
+import { CvsPageComponent } from './cvs-page/cvs-page.component';
+import { ContactsPageComponent } from './contacts-page/contacts-page.component';
+import { ProjectsPageComponent } from './projects-page/projects-page.component';
+import { TechologiesPageComponent } from './techologies-page/techologies-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthPageComponent,
     MenuComponent,
-    TechnologyPageComponent,
-    ProjectPageComponent
+    EmploymentsPageComponent,
+    EducationsPageComponent,
+    CvsPageComponent,
+    ContactsPageComponent,
+    ProjectsPageComponent,
+    TechologiesPageComponent
   ],
   imports: [
     BrowserModule,

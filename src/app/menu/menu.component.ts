@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IRoute } from '../shared/interfaces';
-import { authRoutes } from '../shared/routes';
-import { AuthService } from '../services/auth.service';
+import { IRoute } from '../../shared/interfaces';
+import { authRoutes } from '../../shared/routes';
+import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
+import { TOKEN_KEY } from '../../shared/constants';
 
 @Component({
   selector: 'app-menu',
@@ -11,11 +12,15 @@ import { Subscription } from 'rxjs';
 })
 export class MenuComponent implements OnInit, OnDestroy {
   routes: IRoute[] = [];
-  subscription: Subscription | undefined;
+  private subscription: Subscription | undefined;
 
   constructor(public readonly authService: AuthService) {}
 
   ngOnInit(): void {
+    if (localStorage.getItem(TOKEN_KEY)) {
+      this.authService.auth();
+    }
+
     this.subscription = this.authService
       .getIsAuthStream()
       .subscribe((isAuth: boolean) => {

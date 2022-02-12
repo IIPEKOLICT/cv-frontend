@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthPageComponent } from './auth-page/auth-page.component';
-import { TechnologyPageComponent } from './technology-page/technology-page.component';
-import { ProjectPageComponent } from './project-page/project-page.component';
-import { EndPoint } from './shared/enums';
+import { EndPoint } from '../shared/enums';
+import { TechologiesPageComponent } from './techologies-page/techologies-page.component';
+import { ProjectsPageComponent } from './projects-page/projects-page.component';
+import { ContactsPageComponent } from './contacts-page/contacts-page.component';
+import { CvsPageComponent } from './cvs-page/cvs-page.component';
+import { EducationsPageComponent } from './educations-page/educations-page.component';
+import { EmploymentsPageComponent } from './employments-page/employments-page.component';
 
 const routes: Routes = [
   {
@@ -11,12 +15,28 @@ const routes: Routes = [
     component: AuthPageComponent
   },
   {
-    path: EndPoint.Technology,
-    component: TechnologyPageComponent
+    path: EndPoint.Contacts,
+    component: ContactsPageComponent
   },
   {
-    path: EndPoint.Project,
-    component: ProjectPageComponent
+    path: EndPoint.Cvs,
+    component: CvsPageComponent
+  },
+  {
+    path: EndPoint.Educations,
+    component: EducationsPageComponent
+  },
+  {
+    path: EndPoint.Employments,
+    component: EmploymentsPageComponent
+  },
+  {
+    path: EndPoint.Projects,
+    component: ProjectsPageComponent
+  },
+  {
+    path: EndPoint.Technologies,
+    component: TechologiesPageComponent
   },
   {
     path: '**',

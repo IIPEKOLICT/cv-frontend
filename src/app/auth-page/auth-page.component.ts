@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormModel } from '../shared/enums';
-import { TOKEN_KEY } from '../shared/constants';
+import { FormModel } from '../../shared/enums';
 
 @Component({
   selector: 'app-auth-page',
@@ -19,9 +18,7 @@ export class AuthPageComponent implements OnInit, OnDestroy {
   constructor(private readonly authService: AuthService) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem(TOKEN_KEY)) {
-      this.authService.auth();
-    }
+    this.isAuth = this.authService.getIsAuthStream().observed;
 
     this.form = new FormGroup({
       login: new FormControl('', [

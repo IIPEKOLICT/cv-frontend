@@ -6,16 +6,16 @@ import { AuthResponse } from '../shared/responses';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private isAuth: Subject<boolean> = new Subject<boolean>();
+  private isAuth$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private readonly authApiService: AuthApiService) {}
 
   getIsAuthStream(): Subject<boolean> {
-    return this.isAuth;
+    return this.isAuth$;
   }
 
   private authSubscriber(response: AuthResponse): void {
-    this.isAuth.next(true);
+    this.isAuth$.next(true);
     localStorage.setItem(TOKEN_KEY, `Bearer ${response.token}`);
   }
 
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.isAuth.next(false);
+    this.isAuth$.next(false);
     localStorage.removeItem(TOKEN_KEY);
   }
 }

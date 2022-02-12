@@ -5,7 +5,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AUTHORIZATION_KEY, TOKEN_KEY } from './shared/constants';
+import { AUTHORIZATION_KEY, TOKEN_KEY } from '../shared/constants';
 
 export class AuthInterceptor implements HttpInterceptor {
   intercept(
