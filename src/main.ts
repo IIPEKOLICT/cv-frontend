@@ -1,25 +1,12 @@
-import { NestFactory } from '@nestjs/core';
-import { RequestMethod } from '@nestjs/common';
-import { SwaggerModule } from '@nestjs/swagger';
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { AppModule } from './app.module';
-import { LOCAL_PORT } from './configs/local-vars.config';
-import { swaggerConfig } from './configs/swagger.config';
-import { Route } from './shared/enums';
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
 
-async function bootstrap() {
-  const port = process.env.PORT || LOCAL_PORT;
-  const app = await NestFactory.create(AppModule, { cors: true });
-
-  app.setGlobalPrefix(Route.Api, {
-    exclude: [{ path: '', method: RequestMethod.GET }],
-  });
-
-  const apiDocument = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('', app, apiDocument);
-
-  await app.listen(port, () =>
-    console.log(`Server has been started on port ${port}`)
-  );
+if (environment.production) {
+  enableProdMode();
 }
-bootstrap().then();
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));

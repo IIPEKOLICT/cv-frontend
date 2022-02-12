@@ -1,22 +1,5 @@
 *cv*
-## Nest api app for my CV
-My NestJS + PostgreSQL CV api app
-
-Environment vars:
-- `PORT` server port
-- `DATABASE_URL` database url
-- `JWT_SECRET` secret key for jwt tokens
-- `ADMIN_LOGIN` login for get access to admin panel
-- `ADMIN_PASSWORD` password for get access to admin panel
-
-You need to set `PGSSLMODE`=no-verify for deploy on heroku
-
-Setup PostgreSQl DB:
-```shell
-psql -U postgres
-create database cv;
-\q
-```
+## Angular admin app for my CV
 
 Prepare project:
 ```shell
@@ -27,12 +10,12 @@ npm i
 
 Start project (development):
 ```shell
-npm run start:dev
+npm run start
 ```
 
 Start project (production):
 ```shell
-npm run start:prod
+npm run build
 ```
 
-[Nest guide](NEST.md)
+[Angular guide](NG.md)
