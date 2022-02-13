@@ -1,9 +1,7 @@
-@import '../../lib';
+@import '../../styles/lib';
 
 .auth-page {
-  width: calc(100vw - 200px);
-  height: 100vh;
-  @include flex(row, center, center);
+  justify-content: center;
 
   &__form {
     width: 150px;

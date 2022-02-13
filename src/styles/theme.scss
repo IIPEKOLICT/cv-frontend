@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$admin-primary: mat.define-palette(mat.$amber-palette);
+$admin-accent: mat.define-palette(mat.$green-palette, A200, A100, A400);
+$admin-warn: mat.define-palette(mat.$red-palette);
+
+$admin-theme: mat.define-dark-theme((
+  color: (
+    primary: $admin-primary,
+    accent: $admin-accent,
+    warn: $admin-warn,
+  )
+));
+
+@include mat.all-component-themes($admin-theme);

@@ -18,7 +18,7 @@ export class AuthPageComponent implements OnInit, OnDestroy {
   constructor(private readonly authService: AuthService) {}
 
   ngOnInit(): void {
-    this.isAuth = this.authService.getIsAuthStream().observed;
+    this.isAuth = this.authService.getIsAuth();
 
     this.form = new FormGroup({
       login: new FormControl('', [

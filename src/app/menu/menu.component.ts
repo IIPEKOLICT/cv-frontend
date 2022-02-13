@@ -24,7 +24,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.subscription = this.authService
       .getIsAuthStream()
       .subscribe((isAuth: boolean) => {
-        this.routes = isAuth ? this.routes.concat(authRoutes) : [];
+        this.routes = isAuth ? authRoutes : [];
       });
   }
 

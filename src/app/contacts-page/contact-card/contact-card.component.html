@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ contact.name }}</mat-card-title>
+    <mat-card-subtitle>
+      <a [href]='contact.link'>{{ contact.text }}</a>
+    </mat-card-subtitle>
+    <img mat-card-avatar [src]='imageUrl' alt='contact image'>
+  </mat-card-header>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions>
+    <button mat-button>
+      <mat-icon color='primary' (click)='onChange(contact)'>edit</mat-icon>
+    </button>
+    <button mat-button>
+      <mat-icon
+        color='warn'
+        (click)='contactService.deleteContact(contact.id)'
+      >
+        delete
+      </mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,1 +1,58 @@
-<p>contacts-page works!</p>
+<div class="page">
+  <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          placeholder="Enter name"
+          [value]="nameControl?.value"
+          formControlName='name'
+          autocomplete='off'
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Text</mat-label>
+        <input
+          matInput
+          placeholder="Enter text"
+          [value]="textControl?.value"
+          formControlName='text'
+          autocomplete='off'
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Link</mat-label>
+        <input
+          matInput
+          placeholder="Enter link"
+          [value]="linkControl?.value"
+          formControlName='link'
+          autocomplete='off'
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <label>
+        <input type="file" (change)="onSelectImage($event)" />
+      </label>
+      <button
+        mat-flat-button
+        color="accent"
+        type="submit"
+        [disabled]='form.invalid'
+      >
+        {{ contactService.getIsEdit() ? 'Change contact' : 'Create contact' }}
+      </button>
+    </div>
+  </form>
+  <div class='list-view'>
+    <app-contact-card
+      class='card'
+      *ngFor="let contact of contactService.getContacts()"
+      [contact]="contact"
+      (changeEmitter)='onChange($event)'
+    ></app-contact-card>
+    <h2 *ngIf="contactService.isNoContacts()">No contacts</h2>
+  </div>
+</div>

@@ -14,6 +14,15 @@ import { CvsPageComponent } from './cvs-page/cvs-page.component';
 import { ContactsPageComponent } from './contacts-page/contacts-page.component';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import { TechologiesPageComponent } from './techologies-page/techologies-page.component';
+import { ContactCardComponent } from './contacts-page/contact-card/contact-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -25,14 +34,23 @@ import { TechologiesPageComponent } from './techologies-page/techologies-page.co
     CvsPageComponent,
     ContactsPageComponent,
     ProjectsPageComponent,
-    TechologiesPageComponent
+    TechologiesPageComponent,
+    ContactCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatCardModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatGridListModule,
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

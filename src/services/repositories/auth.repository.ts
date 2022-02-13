@@ -5,7 +5,7 @@ import { API_URL } from '../../shared/constants';
 import { AuthResponse } from '../../shared/responses';
 
 @Injectable({ providedIn: 'root' })
-export class AuthApiService {
+export class AuthRepository {
   private route = `${API_URL}/auth`;
 
   constructor(private readonly httpClient: HttpClient) {}

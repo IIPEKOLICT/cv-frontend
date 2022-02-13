@@ -10,5 +10,9 @@ export enum EndPoint {
 
 export enum FormModel {
   Login = 'login',
-  Password = 'password'
+  Password = 'password',
+  Name = 'name',
+  Text = 'text',
+  Link = 'link',
+  Icon = 'icon'
 }
