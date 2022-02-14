@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { API_URL } from '../../shared/constants';
-import { DeleteResponse } from '../../shared/responses';
-import { Contact } from '../../shared/models';
+import { API_URL } from '../shared/constants';
+import { DeleteResponse } from '../shared/responses';
+import { Contact } from '../shared/models';
 
 @Injectable({ providedIn: 'root' })
 export class ContactRepository {

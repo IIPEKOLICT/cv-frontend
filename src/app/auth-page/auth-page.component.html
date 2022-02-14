@@ -1,29 +1,36 @@
 <div class='page auth-page'>
   <form
-    class='auth-page__form'
+    class='form'
     *ngIf='!isAuth'
     [formGroup]='form'
     (ngSubmit)='submitHandler()'
   >
     <h2>Login</h2>
-    <label>
+    <mat-form-field appearance='outline'>
+      <mat-label>Login</mat-label>
       <input
+        matInput
         type='text'
         placeholder='Enter login'
         [value]='loginControl?.value'
         formControlName='login'
+        autocomplete='off'
       >
-    </label>
-    <label>
+    </mat-form-field>
+    <mat-form-field appearance='outline'>
+      <mat-label>Password</mat-label>
       <input
+        matInput
         type='password'
         placeholder='Enter password'
         [value]='passwordControl?.value'
         formControlName='password'
+        autocomplete='off'
       >
-    </label>
+    </mat-form-field>
     <button
-      class='btn'
+      mat-flat-button
+      color='accent'
       type='submit'
       [disabled]='form.invalid'
     >

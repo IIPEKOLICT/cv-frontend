@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { API_URL } from '../../shared/constants';
-import { AuthResponse } from '../../shared/responses';
+import { API_URL } from '../shared/constants';
+import { AuthResponse } from '../shared/responses';
 
 @Injectable({ providedIn: 'root' })
 export class AuthRepository {

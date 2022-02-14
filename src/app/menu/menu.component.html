@@ -18,7 +18,7 @@
     <div class='divider'></div>
     <li
       class='menu__item menu__item--btn'
-      *ngIf='routes.length'
+      *ngIf='authService.getIsAuth()'
       (click)='authService.logout()'
     >
       <a class='menu__link'>Logout</a>

@@ -1,11 +1,14 @@
 import { IRoute } from './interfaces';
 import { EndPoint } from './enums';
 
-export const authRoutes: IRoute[] = [
+export const publicRoutes: IRoute[] = [
   {
     title: 'Authorization',
     endPoint: EndPoint.Auth
-  },
+  }
+];
+
+export const authRoutes: IRoute[] = publicRoutes.concat([
   {
     title: 'Contacts',
     endPoint: EndPoint.Contacts
@@ -30,4 +33,4 @@ export const authRoutes: IRoute[] = [
     title: 'Technologies',
     endPoint: EndPoint.Technologies
   },
-]
+]);

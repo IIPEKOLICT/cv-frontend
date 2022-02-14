@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ContactRepository } from './repositories/contact.repository';
 import { Contact } from '../shared/models';
-import { DeleteResponse } from '../shared/responses';
+import { ContactRepository } from '../repositories/contact.repository';
+import { BaseService } from '../core/base.service';
 
 @Injectable({ providedIn: 'root' })
-export class ContactService {
+export class ContactService extends BaseService {
   private contacts: Contact[] = [];
   private edited: Contact | undefined;
   private isEdit = false;
 
-  constructor(private readonly contactRepository: ContactRepository) {}
+  constructor(private readonly contactRepository: ContactRepository) {
+    super();
+  }
 
   getContacts(): Contact[] {
     return this.contacts;
@@ -33,13 +35,15 @@ export class ContactService {
   }
 
   loadContacts(): void {
-    this.contactRepository.getAll().subscribe((contacts: Contact[]) => {
-      this.contacts = contacts;
-    });
+    this.loadSubscription = this.contactRepository
+      .getAll()
+      .subscribe((contacts: Contact[]) => {
+        this.contacts = contacts;
+      });
   }
 
   createContact(formData: FormData): void {
-    this.contactRepository
+    this.createSubscription = this.contactRepository
       .create(formData)
       .subscribe((contact: Contact) => {
         this.contacts.push(contact);
@@ -48,7 +52,7 @@ export class ContactService {
 
   changeContact(formData: FormData): void {
     if (!this.edited) return;
-    this.contactRepository
+    this.changeSubscription = this.contactRepository
       .change(this.edited.id, formData)
       .subscribe((contact: Contact) => {
         this.isEdit = false;
@@ -63,10 +67,12 @@ export class ContactService {
   }
 
   deleteContact(id: number): void {
-    this.contactRepository.delete(id).subscribe(() => {
-      this.contacts = this.contacts.filter(
-        (contact: Contact) => contact.id !== id
-      );
-    });
+    this.deleteSubscription = this.contactRepository
+      .delete(id)
+      .subscribe(() => {
+        this.contacts = this.contacts.filter(
+          (contact: Contact) => contact.id !== id
+        );
+      });
   }
 }
