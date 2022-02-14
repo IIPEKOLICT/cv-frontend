@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Contact } from '../shared/models';
 import { ContactRepository } from '../repositories/contact.repository';
 import { BaseService } from '../core/base.service';
+import { DeleteResponse } from "../shared/responses";
 
 @Injectable({ providedIn: 'root' })
 export class ContactService extends BaseService {
@@ -69,9 +70,10 @@ export class ContactService extends BaseService {
   deleteContact(id: number): void {
     this.deleteSubscription = this.contactRepository
       .delete(id)
-      .subscribe(() => {
+      .subscribe((response: DeleteResponse) => {
+        console.log(response);
         this.contacts = this.contacts.filter(
-          (contact: Contact) => contact.id !== id
+          (contact: Contact) => contact.id !== response.id
         );
       });
   }
